@@ -199,9 +199,8 @@ var (
 )
 
 func ctlHandler(ctl, evtype, evdata, context uintptr) uintptr {
-	s := (*service)(unsafe.Pointer(context))
 	e := ctlEvent{cmd: Cmd(ctl), eventType: uint32(evtype), eventData: evdata, context: 123456} // Set context to 123456 to test issue #25660.
-	s.c <- e
+	theService.c <- e
 	return 0
 }
 
