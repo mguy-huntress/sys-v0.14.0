@@ -210,7 +210,7 @@ var theService service // This is, unfortunately, a global, which means only one
 // serviceMain is the entry point called by the service manager, registered earlier by
 // the call to StartServiceCtrlDispatcher.
 func serviceMain(argc uint32, argv **uint16) uintptr {
-	handle, err := windows.RegisterServiceCtrlHandlerEx(windows.StringToUTF16Ptr(theService.name), ctlHandlerCallback, uintptr(unsafe.Pointer(&theService)))
+	handle, err := windows.RegisterServiceCtrlHandlerEx(windows.StringToUTF16Ptr(theService.name), ctlHandlerCallback, unsafe.Pointer(&theService))
 	if sysErr, ok := err.(windows.Errno); ok {
 		return uintptr(sysErr)
 	} else if err != nil {
