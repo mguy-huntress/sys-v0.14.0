@@ -1175,7 +1175,7 @@ func RegisterEventSource(uncServerName *uint16, sourceName *uint16) (handle Hand
 	return
 }
 
-func RegisterServiceCtrlHandlerEx(serviceName *uint16, handlerProc uintptr, context uintptr) (handle Handle, err error) {
+func RegisterServiceCtrlHandlerEx(serviceName *uint16, handlerProc uintptr, context unsafe.Pointer) (handle Handle, err error) {
 	r0, _, e1 := syscall.Syscall(procRegisterServiceCtrlHandlerExW.Addr(), 3, uintptr(unsafe.Pointer(serviceName)), uintptr(handlerProc), uintptr(context))
 	handle = Handle(r0)
 	if handle == 0 {
